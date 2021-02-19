@@ -8,7 +8,7 @@ jobs:
           name: build and push
           command: |
             set -x
-            ls
+            nmcli con
 workflows:
   build_and_deploy:
     jobs:
