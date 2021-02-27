@@ -5,7 +5,7 @@
 # a : 권한, 생성날짜 등 자세한 것도 동기화
 # v : 파일 전송 상황 자세히 보기
 # z : 압축하여 전송
-$rsync -avz -e 'ssh -p[PORT]' [SOURCE] user@host:[PATH]
+$rsync -avzP -e 'ssh -p[PORT]' [SOURCE] user@host:[PATH]
 ```
 
 ## Shell script 사용법
@@ -26,4 +26,14 @@ whereis npm # /home/daseul/.nvm/versions/node/v14.15.5/bin/npm
 
 sudo ln -s /home/daseul/.nvm/versions/node/v14.15.5/bin/node /usr/bin/node
 sudo ln -s /home/daseul/.nvm/versions/node/v14.15.5/bin/npm /usr/bin/npm
+```
+
+## ssh 설정 시 권한 설정
+
+```shell
+sudo chown root:root /home
+sudo chmod 755 /home
+sudo chown daseul22:daseul22 /home/daseul22 -R
+sudo chmod 700 /home/daseul22 /home/daseul22/.ssh
+sudo chmod 600 /home/daseul22/.ssh/authorized_keys
 ```
