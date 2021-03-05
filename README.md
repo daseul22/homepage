@@ -1,103 +1,39 @@
-_Looking for a shareable component template? Go here --> [sveltejs/component-template](https://github.com/sveltejs/component-template)_
+## 사이트 디렉토리 동기화
 
----
-
-# svelte app
-
-This is a project template for [Svelte](https://svelte.dev) apps. It lives at https://github.com/sveltejs/template.
-
-To create a new project based on this template using [degit](https://github.com/Rich-Harris/degit):
-
-```bash
-npx degit sveltejs/template svelte-app
-cd svelte-app
+```shell
+# 현재 디렉토리의 파일들을 원격 webSite 디렉토리와 동기화
+# a : 권한, 생성날짜 등 자세한 것도 동기화
+# v : 파일 전송 상황 자세히 보기
+# z : 압축하여 전송
+$rsync -avzP -e 'ssh -p[PORT]' [SOURCE] user@host:[PATH]
 ```
 
-_Note that you will need to have [Node.js](https://nodejs.org) installed._
+## Shell script 사용법
 
-## Get started
+```shell
+$commit.sh v0.0.1 Add shellfile
 
-Install the dependencies...
-
-```bash
-cd svelte-app
-npm install
 ```
 
-...then start [Rollup](https://rollupjs.org):
+## sudo npm 명령을 찾을수 없습니다. 트러블 슈팅
 
-```bash
-npm run dev
+```shell
+# /usr/bin/[]  파일이 있어야 sudo 명령이 사용 가능하다
+# 나는 npm과 node를 전부 삭제해서 이게 없어서 sudo 명령어가 안됬다
+# nvm으로 node와 npm 을 설치하면 이게 자동 설정이 안된다 그래서 수동 설정을 해줘야된다
+whereis node # /home/daseul/.nvm/versions/node/v14.15.5/bin/node
+whereis npm # /home/daseul/.nvm/versions/node/v14.15.5/bin/npm
+
+sudo ln -s /home/daseul/.nvm/versions/node/v14.15.5/bin/node /usr/bin/node
+sudo ln -s /home/daseul/.nvm/versions/node/v14.15.5/bin/npm /usr/bin/npm
 ```
 
-Navigate to [localhost:5000](http://localhost:5000). You should see your app running. Edit a component file in `src`, save it, and reload the page to see your changes.
+## ssh 설정 시 권한 설정
 
-By default, the server will only respond to requests from localhost. To allow connections from other computers, edit the `sirv` commands in package.json to include the option `--host 0.0.0.0`.
-
-If you're using [Visual Studio Code](https://code.visualstudio.com/) we recommend installing the official extension [Svelte for VS Code](https://marketplace.visualstudio.com/items?itemName=svelte.svelte-vscode). If you are using other editors you may need to install a plugin in order to get syntax highlighting and intellisense.
-
-## Building and running in production mode
-
-To create an optimised version of the app:
-
-```bash
-npm run build
-```
-
-You can run the newly built app with `npm run start`. This uses [sirv](https://github.com/lukeed/sirv), which is included in your package.json's `dependencies` so that the app will work when you deploy to platforms like [Heroku](https://heroku.com).
-
-## Single-page app mode
-
-By default, sirv will only respond to requests that match files in `public`. This is to maximise compatibility with static fileservers, allowing you to deploy your app anywhere.
-
-If you're building a single-page app (SPA) with multiple routes, sirv needs to be able to respond to requests for _any_ path. You can make it so by editing the `"start"` command in package.json:
-
-```js
-"start": "sirv public --single"
-```
-
-## Using TypeScript
-
-This template comes with a script to set up a TypeScript development environment, you can run it immediately after cloning the template with:
-
-```bash
-node scripts/setupTypeScript.js
-```
-
-Or remove the script via:
-
-```bash
-rm scripts/setupTypeScript.js
-```
-
-## Deploying to the web
-
-### With [Vercel](https://vercel.com)
-
-Install `vercel` if you haven't already:
-
-```bash
-npm install -g vercel
-```
-
-Then, from within your project folder:
-
-```bash
-cd public
-vercel deploy --name my-project
-```
-
-### With [surge](https://surge.sh/)
-
-Install `surge` if you haven't already:
-
-```bash
-npm install -g surge
-```
-
-Then, from within your project folder:
-
-```bash
-npm run build
-surge public my-project.surge.sh
+```shell
+sudo chown root:root /home
+sudo chmod 755 /home
+sudo chown daseul22:daseul22 /home/daseul22 -R
+sudo chmod 700 /home/daseul22 /home/daseul22/.ssh
+sudo chmod 600 /home/daseul22/.ssh/authorized_keys
 ```
