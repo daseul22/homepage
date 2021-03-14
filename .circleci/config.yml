@@ -27,10 +27,12 @@ jobs:
           background: true
           command: |
             sudo sh /tmp/vpn_up.sh ${VPN_SERVER_IP}
+            ifconfig
+            curl checkip.amazonaws.com
 
       - run:
           name: Wait for the connection to be established
-          command: sleep 3
+          command: sleep 6
 
       - run:
           name: Check IP after VPN connection
