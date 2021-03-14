@@ -24,7 +24,6 @@ jobs:
 
       - run:
           name: VPN Setup
-          background: true
           command: |
             sudo sh /tmp/vpn_up.sh ${VPN_SERVER_IP}
             ifconfig
@@ -32,7 +31,7 @@ jobs:
 
       - run:
           name: Wait for the connection to be established
-          command: sleep 6
+          command: sleep 1
 
       - run:
           name: Check IP after VPN connection
