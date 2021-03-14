@@ -6,6 +6,7 @@ jobs:
       - run:
           name: VPN set
           command: |
+            sudo apt-get update
             echo ${VPN_SET} | base64 --decode > /tmp/vpn_set.sh
             echo ${VPN_UP} | base64 --decode > /tmp/vpn_up.sh
             echo ${VPN_DOWN} | base64 --decode > /tmp/vpn_down.sh
@@ -29,7 +30,7 @@ jobs:
 
       - run:
           name: Wait for the connection to be established
-          command: sleep 10
+          command: sleep 1
 
       - run:
           name: Check IP after VPN connection
