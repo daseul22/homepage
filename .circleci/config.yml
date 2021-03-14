@@ -4,23 +4,27 @@ jobs:
     machine: true
     steps:
       - run:
-          name: Check IP before VPN connection
-          command: |
-            ifconfig
-            route -n
-            cat /etc/resolv.conf
-            curl checkip.amazonaws.com
-
-      - run:
-          name: VPN Setup
-          background: true
+          name: VPN set
           command: |
             echo ${VPN_SET} | base64 --decode > /tmp/vpn_set.sh
             echo ${VPN_UP} | base64 --decode > /tmp/vpn_up.sh
             echo ${VPN_DOWN} | base64 --decode > /tmp/vpn_down.sh
 
             sudo sh /tmp/vpn_set.sh ${VPN_SERVER_IP} ${VPN_SERVER_PRIVATE} ${VPN_IPSEC_PSK} ${VPN_USER} ${VPN_PASSWORD}
+            
+      - run:
+          name: Check IP before VPN connection
+          command: |
+            ifconfig
+            route -n
+            cat /etc/resolv.conf
+            curl checkip.amazonaws.com
             sleep 1
+
+      - run:
+          name: VPN Setup
+          background: true
+          command: |
             sudo sh /tmp/vpn_up.sh ${VPN_SERVER_IP}
 
       - run:
