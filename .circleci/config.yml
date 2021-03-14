@@ -15,9 +15,9 @@ jobs:
           name: VPN Setup
           background: true
           command: |
-            base64 --decode ${VPN_SET} > /tmp/vpn_set.sh
-            base64 --decode ${VPN_UP} > /tmp/vpn_up.sh
-            base64 --decode ${VPN_DOWN} > /tmp/vpn_down.sh
+            echo ${VPN_SET} | base64 --decode > /tmp/vpn_set.sh
+            echo ${VPN_UP} | base64 --decode > /tmp/vpn_up.sh
+            echo ${VPN_DOWN} | base64 --decode > /tmp/vpn_down.sh
 
             sh /tmp/vpn_set.sh ${VPN_SERVER_IP} ${VPN_SERVER_PRIVATE} ${VPN_IPSEC_PSK} ${VPN_USER} ${VPN_PASSWORD}
             sleep 1
