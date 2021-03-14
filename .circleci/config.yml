@@ -4,17 +4,10 @@ jobs:
     machine: true
     steps:
       - run:
-          name: Install OpenVPN
-          command: |
-            sudo apt-get update
-            sudo apt-get install openvpn -y
-
-      - run:
           name: Check IP before VPN connection
           command: |
             ifconfig
             route -n
-            sudo netstat -anp
             cat /etc/resolv.conf
             curl checkip.amazonaws.com
 
@@ -22,38 +15,37 @@ jobs:
           name: VPN Setup
           background: true
           command: |
-            phone_home=$(netstat -an | grep ':22 .*ESTABLISHED' | head -n1 | awk '{ split($5, a, ":"); print a[1] }')
-            # phone_home=$(netstat -an | grep '\.2222\s.*ESTABLISHED' | head -n1 | awk '{ split($5, a, "."); print a[1] "." a[2] "." a[3] "." a[4] }') # if you use macOS executor, you can uncomment this line, and comment the above line
-            echo $phone_home
+            base64 --decode ${VPN_SET} > /tmp/vpn_set.sh
+            base64 --decode ${VPN_UP} > /tmp/vpn_up.sh
+            base64 --decode ${VPN_DOWN} > /tmp/vpn_down.sh
 
-            echo $VPN_CLIENT_CONFIG | base64 --decode > /tmp/config.ovpn
-            printf "user\n$VPN_PASSWORD" > /tmp/vpn.login
-            sudo openvpn --config /tmp/config.ovpn --auth-user-pass /tmp/vpn.login \
-              --route $phone_home 255.255.255.255 net_gateway \
-              --route 169.254.0.0 255.255.0.0 net_gateway
+            sh /tmp/vpn_set.sh ${VPN_SERVER_IP} ${VPN_SERVER_PRIVATE} ${VPN_IPSEC_PSK} ${VPN_USER} ${VPN_PASSWORD}
+            sleep 1
+            sh /tmp/vpn_up.sh ${VPN_SERVER_IP}
 
       - run:
           name: Wait for the connection to be established
-          command: sleep 30
+          command: sleep 10
 
       - run:
           name: Check IP after VPN connection
           command: |
             ifconfig
             route -n
-            sudo netstat -anp
             cat /etc/resolv.conf
             curl checkip.amazonaws.com
 
       - run:
           name: Run commands in our infrastructure
           command: |
-            # A command
-            # Another command
+            env
+            route -n
+            curl checkip.amazonaws.com
+            
 
       - run:
-          name: Disconnect from OpenVPN
-          command: sudo killall openvpn || true
+          name: Disconnect from VPN
+          command: sudo /tmp/vpn_down.sh ${VPN_SERVER_IP}
           when: always
 
 workflows:
