@@ -30,7 +30,7 @@ jobs:
 
       - run:
           name: Wait for the connection to be established
-          command: sleep 1
+          command: sleep 3
 
       - run:
           name: Check IP after VPN connection
