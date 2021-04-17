@@ -1,23 +1,21 @@
 <script>
 	import Router from "svelte-spa-router"
-	import {routes} from "./routes"
-	import Sidevar from "./components/Sidebar.svelte"
-	
+	import { routes } from "./routes"
+	import { Header, Body, Footer } from "./components"
 </script>
 
-<style>
-
-	:global(*) {
-		box-sizing: border-box;
-	}
-	.root {
+<style lang="scss">
+	#app-wrap {
 		display: flex;
-		width: 100vw;
-		height: 100vh;
+		flex-direction: column;
+		height: 100%;
 	}
 </style>
 
-<div class="root">
-	<Sidevar />
-	<Router {routes} />
+<div id="app-wrap">
+	<Header />
+	<Body>
+		<Router {routes} />
+	</Body>
+	<Footer />
 </div>
