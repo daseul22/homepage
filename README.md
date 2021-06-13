@@ -1,39 +1,34 @@
-## 사이트 디렉토리 동기화
+This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
 
-```shell
-# 현재 디렉토리의 파일들을 원격 webSite 디렉토리와 동기화
-# a : 권한, 생성날짜 등 자세한 것도 동기화
-# v : 파일 전송 상황 자세히 보기
-# z : 압축하여 전송
-$rsync -avzP -e 'ssh -p[PORT]' [SOURCE] user@host:[PATH]
+## Getting Started
+
+First, run the development server:
+
+```bash
+npm run dev
+# or
+yarn dev
 ```
 
-## Shell script 사용법
+Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
 
-```shell
-$commit.sh v0.0.1 Add shellfile
+You can start editing the page by modifying `pages/index.js`. The page auto-updates as you edit the file.
 
-```
+[API routes](https://nextjs.org/docs/api-routes/introduction) can be accessed on [http://localhost:3000/api/hello](http://localhost:3000/api/hello). This endpoint can be edited in `pages/api/hello.js`.
 
-## sudo npm 명령을 찾을수 없습니다. 트러블 슈팅
+The `pages/api` directory is mapped to `/api/*`. Files in this directory are treated as [API routes](https://nextjs.org/docs/api-routes/introduction) instead of React pages.
 
-```shell
-# /usr/bin/[]  파일이 있어야 sudo 명령이 사용 가능하다
-# 나는 npm과 node를 전부 삭제해서 이게 없어서 sudo 명령어가 안됬다
-# nvm으로 node와 npm 을 설치하면 이게 자동 설정이 안된다 그래서 수동 설정을 해줘야된다
-whereis node # /home/daseul/.nvm/versions/node/v14.15.5/bin/node
-whereis npm # /home/daseul/.nvm/versions/node/v14.15.5/bin/npm
+## Learn More
 
-sudo ln -s /home/daseul/.nvm/versions/node/v14.15.5/bin/node /usr/bin/node
-sudo ln -s /home/daseul/.nvm/versions/node/v14.15.5/bin/npm /usr/bin/npm
-```
+To learn more about Next.js, take a look at the following resources:
 
-## ssh 설정 시 권한 설정
+- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
+- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
 
-```shell
-sudo chown root:root /home
-sudo chmod 755 /home
-sudo chown daseul22:daseul22 /home/daseul22 -R
-sudo chmod 700 /home/daseul22 /home/daseul22/.ssh
-sudo chmod 600 /home/daseul22/.ssh/authorized_keys
-```
+You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
+
+## Deploy on Vercel
+
+The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+
+Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
