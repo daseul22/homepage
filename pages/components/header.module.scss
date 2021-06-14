@@ -2,12 +2,15 @@
 
 @include basic {
 	.wrap {
+		//position: static; // position 스왑
 		background-color: #fdfdfd;
-		position: fixed;
+		position: fixed; // position 스왑
 		z-index: 100;
 		width: 100%;
 		top: 0;
 		border-bottom: 1px solid #ddd;
+		max-width: 960px;
+		margin: 0 auto;
 		.nav {
 			height: 50px;
 			display: flex;
@@ -17,10 +20,9 @@
 			font-family: "Roboto Condensed", sans-serif;
 			padding: 0 1rem;
 			text-transform: uppercase;
+			max-width: 960px;
+			margin: 0 auto;
 			.blog-logo {
-				//order: 0;
-				width: auto;
-
 				line-height: 50px;
 				font-size: 18px;
 				text-decoration: none;
@@ -40,6 +42,20 @@
 }
 @include tablet {
 	.wrap {
+		.nav {
+			text-align: center;
+			.blog-logo {
+				//order: 0;
+				width: auto;
+			}
+			a {
+				display: block;
+			}
+		}
+	}
+}
+@include desktop {
+	.wrap {
 		width: 62%;
 		max-width: 770px;
 		margin-left: 28%;
@@ -47,19 +63,10 @@
 			padding: 0;
 			text-align: left;
 			a {
-				font-size: 13px;
-				padding: 0 2em;
-				margin: 0;
-			}
-		}
-	}
-}
-@include desktop {
-	.wrap {
-		.nav {
-			text-align: center;
-			a {
 				display: block;
+				font-size: 13px;
+				padding-right: 2em;
+				margin: 0;
 			}
 		}
 	}

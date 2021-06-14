@@ -4,6 +4,7 @@ import styles from "../styles/Home.module.scss"
 import Link from "next/link"
 import { getSortedPostsData } from "../lib/posts"
 import Header from "./components/header"
+import Aside from "./components/aside"
 
 export async function getStaticProps() {
 	const allPostsData = getSortedPostsData()
@@ -26,6 +27,7 @@ export default function Home({ allPostsData }) {
 				<link rel="icon" href="/favicon.ico" />
 			</Head>
 			<Header />
+			<Aside />
 		</div>
 	)
 }
