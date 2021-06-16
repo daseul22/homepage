@@ -1,5 +1,16 @@
-.container {
-    max-width: 36rem;
-    padding: 0 1rem;
-    margin: 3rem auto 6rem;
-  }
+@import "../../styles/mixin";
+
+@include basic {
+	.wrap {
+		margin-top: 50px;
+	}
+}
+@include tablet {
+}
+@include desktop {
+	.wrap {
+		width: 62%;
+		max-width: 770px;
+		margin-left: 28%;
+	}
+}
