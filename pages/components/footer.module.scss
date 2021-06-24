@@ -1,0 +1,23 @@
+@import "../../styles/mixin";
+
+@include basic {
+	.footer {
+		height: 4em;
+		margin: 5em auto 0;
+		font-size: 70%;
+		border-top: 1px solid #ddd;
+		text-transform: uppercase;
+		text-align: center;
+		line-height: 1.5em;
+		padding-top: 15px;
+	}
+}
+@include tablet {
+}
+@include desktop {
+	.footer {
+		width: 62%;
+		max-width: 770px;
+		margin-left: 28%;
+	}
+}
