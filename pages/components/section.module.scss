@@ -1,0 +1,24 @@
+@import "../../styles/mixin";
+
+@include basic {
+	.post {
+		position: relative;
+		h2 {
+			padding-bottom: 0.7em;
+			border-bottom: 1px solid #eee;
+		}
+	}
+	.date {
+		text-align: right;
+		float: right;
+		color: #d4d4d4;
+		display: none;
+	}
+}
+@include tablet {
+	.date {
+		display: block;
+	}
+}
+@include desktop {
+}
